@@ -1,8 +1,8 @@
 <?php
 
-namespace PennyBlack\Exception;
+namespace StordUnbox\Exception;
 
-class ServiceUnavailableException extends PennyBlackException
+class ServiceUnavailableException extends UnboxException
 {
     public function __construct(string $message, int $code = 0)
     {

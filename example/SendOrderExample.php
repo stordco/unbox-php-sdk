@@ -2,10 +2,10 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 
-use PennyBlack\Api;
-use PennyBlack\Exception\PennyBlackException;
-use PennyBlack\Model\Order;
-use PennyBlack\Model\Customer;
+use StordUnbox\Api;
+use StordUnbox\Exception\UnboxException;
+use StordUnbox\Model\Order;
+use StordUnbox\Model\Customer;
 use GuzzleHttp\Psr7\HttpFactory;
 use GuzzleHttp\Client;
 
@@ -61,6 +61,6 @@ $customer->setEmail('john.doe@example.com')
 
 try {
     $api->sendOrder($order, $customer, 'magento', '1.0.1');
-} catch (PennyBlackException $e) {
+} catch (UnboxException $e) {
     print 'OOPS! Something went wrong: ' . $e->getMessage();
 }

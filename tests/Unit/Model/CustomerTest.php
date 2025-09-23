@@ -2,8 +2,8 @@
 
 namespace Unit\Model;
 
-use PennyBlack\Exception\PennyBlackException;
-use PennyBlack\Model\Customer;
+use StordUnbox\Exception\UnboxException;
+use StordUnbox\Model\Customer;
 use PHPUnit\Framework\TestCase;
 
 class CustomerTest extends TestCase
@@ -86,7 +86,7 @@ class CustomerTest extends TestCase
 
     public function testItThrowsAnExceptionIfRequiredFieldsAreNotSet()
     {
-        $this->expectException(PennyBlackException::class);
+        $this->expectException(UnboxException::class);
         $this->expectExceptionMessage('Required field "lastName" must be set');
 
         $customer = new Customer();
@@ -98,7 +98,7 @@ class CustomerTest extends TestCase
 
     public function testItThrowsAnExceptionIfNonStringAttributeKeysAreSet()
     {
-        $this->expectException(PennyBlackException::class);
+        $this->expectException(UnboxException::class);
         $this->expectExceptionMessage('Attribute keys must be strings, received: 1');
 
         $customer = new Customer();
@@ -111,7 +111,7 @@ class CustomerTest extends TestCase
 
     public function testItThrowsAnExceptionIfANullAttributeValueIsSet()
     {
-        $this->expectException(PennyBlackException::class);
+        $this->expectException(UnboxException::class);
         $this->expectExceptionMessage('Received a null value for attribute "my_attribute"');
 
         $customer = new Customer();

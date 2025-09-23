@@ -2,8 +2,8 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 
-use PennyBlack\Api;
-use PennyBlack\Exception\PennyBlackException;
+use StordUnbox\Api;
+use StordUnbox\Exception\UnboxException;
 use GuzzleHttp\Psr7\HttpFactory;
 use GuzzleHttp\Client;
 
@@ -20,6 +20,6 @@ $api = new Api($httpClient, $requestFactory, $streamFactory, $apiKey, $isTest, '
 
 try {
     $api->installStore('store.example.com');
-} catch (PennyBlackException $e) {
+} catch (UnboxException $e) {
     print 'OOPS! Something went wrong: ' . $e->getMessage();
 }
