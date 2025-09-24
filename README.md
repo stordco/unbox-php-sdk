@@ -18,7 +18,7 @@ See the [Unbox API documentation](https://pennyblack.stoplight.io/docs/pennyblac
 For production environments you can include the library as a dependency in your project using composer.
 
 ```bash
-composer require pennyblack/php-sdk
+composer require stordco/unbox-php-sdk
 ```
 
 You will also need to ensure you have packages that satisfy the virtual `psr/http-client-implementation` and `psr/http-factory-implementation` requirements.
