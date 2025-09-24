@@ -1,8 +1,8 @@
 <?php
 
-namespace PennyBlack\Model;
+namespace StordUnbox\Model;
 
-use PennyBlack\Exception\PennyBlackException;
+use StordUnbox\Exception\UnboxException;
 
 class Order
 {
@@ -167,7 +167,7 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function setSkus(array $skus): self
     {
@@ -177,7 +177,7 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function setProductTitles(array $productTitles): self
     {
@@ -187,7 +187,7 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function setPromoCodes(array $promoCodes): self
     {
@@ -204,7 +204,7 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function setTags(array $tags): self
     {
@@ -214,7 +214,7 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function setAttributes(array $attributes): self
     {
@@ -224,7 +224,7 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function toArray(): array
     {
@@ -270,25 +270,25 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     private function validateRequiredFields(): void
     {
         foreach (self::REQUIRED_FIELDS as $requiredField) {
             if (!isset($this->{$requiredField})) {
-                throw new PennyBlackException('Required field "' . $requiredField . '" must be set');
+                throw new UnboxException('Required field "' . $requiredField . '" must be set');
             }
         }
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     private function itemsMustBeStrings(array $items, string $fieldName): array
     {
         array_walk($items, function ($item, $key) use ($fieldName) {
             if (!is_string($item)) {
-                throw new PennyBlackException('All ' . $fieldName . ' array items must be strings');
+                throw new UnboxException('All ' . $fieldName . ' array items must be strings');
             }
         });
 
@@ -296,17 +296,17 @@ class Order
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     private function validateAttributes(array $attributes): array
     {
         foreach ($attributes as $key => $value) {
             if (!is_string($key)) {
-                throw new PennyBlackException('Attribute keys must be strings, received: ' . $key);
+                throw new UnboxException('Attribute keys must be strings, received: ' . $key);
             }
 
             if (is_null($value)) {
-                throw new PennyBlackException(sprintf('Received a null value for attribute "%s"', $key));
+                throw new UnboxException(sprintf('Received a null value for attribute "%s"', $key));
             }
         }
 
