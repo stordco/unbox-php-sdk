@@ -1,8 +1,8 @@
 <?php
 
-namespace PennyBlack\Model;
+namespace StordUnbox\Model;
 
-use PennyBlack\Exception\PennyBlackException;
+use StordUnbox\Exception\UnboxException;
 
 class Customer
 {
@@ -102,7 +102,7 @@ class Customer
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function setAttributes(array $attributes): self
     {
@@ -112,7 +112,7 @@ class Customer
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function toArray(): array
     {
@@ -151,29 +151,29 @@ class Customer
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     private function validateRequiredFields(): void
     {
         foreach (self::REQUIRED_FIELDS as $requiredField) {
             if (!isset($this->{$requiredField})) {
-                throw new PennyBlackException('Required field "' . $requiredField . '" must be set');
+                throw new UnboxException('Required field "' . $requiredField . '" must be set');
             }
         }
     }
 
     /**
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     private function validateAttributes(array $attributes): array
     {
         foreach ($attributes as $key => $value) {
             if (!is_string($key)) {
-                throw new PennyBlackException('Attribute keys must be strings, received: ' . $key);
+                throw new UnboxException('Attribute keys must be strings, received: ' . $key);
             }
 
             if (is_null($value)) {
-                throw new PennyBlackException(sprintf('Received a null value for attribute "%s"', $key));
+                throw new UnboxException(sprintf('Received a null value for attribute "%s"', $key));
             }
         }
 

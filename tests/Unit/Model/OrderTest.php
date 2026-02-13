@@ -2,8 +2,8 @@
 
 namespace Unit\Model;
 
-use PennyBlack\Exception\PennyBlackException;
-use PennyBlack\Model\Order;
+use StordUnbox\Exception\UnboxException;
+use StordUnbox\Model\Order;
 use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase
@@ -128,7 +128,7 @@ class OrderTest extends TestCase
 
     public function testItThrowsAnExceptionIfRequiredFieldsAreNotSet()
     {
-        $this->expectException(PennyBlackException::class);
+        $this->expectException(UnboxException::class);
         $this->expectExceptionMessage('Required field "number" must be set');
 
         $order = new Order();
@@ -142,7 +142,7 @@ class OrderTest extends TestCase
 
     public function testItThrowsAnExceptionIfNonStringArrayItemsAreSet()
     {
-        $this->expectException(PennyBlackException::class);
+        $this->expectException(UnboxException::class);
         $this->expectExceptionMessage('All promo codes array items must be strings');
 
         $createdAt = new \DateTime();
@@ -161,7 +161,7 @@ class OrderTest extends TestCase
 
     public function testItThrowsAnExceptionIfNonStringAttributeKeysAreSet()
     {
-        $this->expectException(PennyBlackException::class);
+        $this->expectException(UnboxException::class);
         $this->expectExceptionMessage('Attribute keys must be strings, received: 1');
 
         $createdAt = new \DateTime();
@@ -179,7 +179,7 @@ class OrderTest extends TestCase
 
     public function testItThrowsAnExceptionIfANullAttributeValueIsSet()
     {
-        $this->expectException(PennyBlackException::class);
+        $this->expectException(UnboxException::class);
         $this->expectExceptionMessage('Received a null value for attribute "my_attribute"');
 
         $createdAt = new \DateTime();

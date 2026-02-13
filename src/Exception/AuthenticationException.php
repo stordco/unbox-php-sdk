@@ -1,8 +1,8 @@
 <?php
 
-namespace PennyBlack\Exception;
+namespace StordUnbox\Exception;
 
-class AuthenticationException extends PennyBlackException
+class AuthenticationException extends UnboxException
 {
     public function __construct($statusCode)
     {
