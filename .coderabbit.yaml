@@ -1,0 +1,158 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-US
+tone_instructions: >-
+  Be concise and professional. Use short bullets. No poems, jokes, or filler.
+  Flag bugs, regressions, security, and repo convention gaps.
+  Do not restyle code that PHPStan or PHPCS already cover.
+early_access: false
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  high_level_summary_instructions: >-
+    Write 2-5 short bullets covering what changed and why. Skip file-by-file
+    lists. Mention risk or follow-up only when it matters.
+  poem: false
+  in_progress_fortune: false
+  review_status: true
+  review_details: false
+  collapse_walkthrough: true
+  changed_files_summary: true
+  sequence_diagrams: false
+  estimate_code_review_effort: false
+  assess_linked_issues: true
+  related_issues: false
+  related_prs: false
+  suggested_labels: true
+  auto_apply_labels: false
+  labeling_instructions:
+    - label: enhancement
+      instructions: Apply when the PR adds user-facing SDK functionality.
+    - label: bug
+      instructions: Apply when the PR fixes incorrect behavior.
+    - label: dependencies
+      instructions: Apply when the PR is primarily Composer or GitHub Actions updates.
+    - label: technical-debt
+      instructions: Apply when the PR is a refactor, cleanup, or non-functional improvement.
+  suggested_reviewers: true
+  auto_assign_reviewers: false
+  enable_prompt_for_ai_agents: true
+
+  path_filters:
+    - '!vendor/**'
+    - '!composer.lock'
+    - '!**/*.{svg,png,jpg,jpeg,gif,webp,ico}'
+    - '!**/*.{woff,woff2,ttf,otf,eot}'
+    - '!**/.phpunit.result.cache'
+
+  path_instructions:
+    - path: 'src/**/*.php'
+      instructions: >-
+        This is the Unbox PHP SDK (`pennyblack/php-sdk`, namespace PennyBlack).
+        It is a PSR-7/17/18 HTTP client for the Penny Black / Unbox API, targeting
+        PHP >=7.4 (CI: 7.4, 8.2, 8.3). Do not suggest PHP 8-only syntax
+        (constructor promotion, union types, named arguments, match, enums,
+        readonly, nullsafe) unless the PR already raises the PHP requirement.
+        Public surface is Api, Model\Order, Model\Customer, and the
+        Exception\PennyBlackException hierarchy. Flag breaking signature,
+        return-type, or payload changes. Keep HTTP via injected
+        ClientInterface, RequestFactoryInterface, and StreamFactoryInterface;
+        do not couple src/ to Guzzle. Send the API key only as X-Api-Key; never
+        log or embed secrets. Map HTTP failures to ApiException,
+        AuthenticationException, ServerErrorException, or
+        ServiceUnavailableException. Models use fluent setters and toArray();
+        keep required vs optional fields. Do not restyle what PHPCS (PSR-12,
+        phpcs.xml) or PHPStan (level 5, phpstan.neon paths: src) already cover.
+
+    - path: 'tests/**/*.php'
+      instructions: >-
+        PHPUnit 8 tests live under tests/Unit/. Mock PSR HTTP client and
+        factories; do not call live APIs. Cover success, auth failures, 5xx and
+        retries, and test vs production base URLs. Keep examples of keys as
+        placeholders. Do not restyle what PHPCS already covers in src/.
+
+    - path: 'example/**/*.php'
+      instructions: >-
+        Examples must keep placeholder keys such as YOUR-API-KEY. Flag real
+        secrets. Stay on the public Api / Order / Customer surface and PSR-18
+        (Guzzle is an example implementation only).
+
+    - path: 'composer.json'
+      instructions: >-
+        Keep php >=7.4.0 and PSR HTTP virtual packages in require. Guzzle
+        belongs in require-dev only. Flag dropping PHP 7.4, adding a concrete
+        HTTP client to production require, or scripts that skip phpcs, phpstan,
+        or phpmd.
+
+    - path: '.github/workflows/**'
+      instructions: >-
+        Flag secret exposure, unpinned or unsha-locked actions, overly broad
+        permissions, and workflow changes that would skip composer unit-test or
+        quality-check (phpcs, phpstan, phpmd) on PRs into main.
+
+  auto_review:
+    enabled: true
+    incremental_reviews: true
+    drafts: true
+    ignore_title_keywords:
+      - DO NOT MERGE
+    base_branches:
+      - main
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: false
+
+  pre_merge_checks:
+    docstrings:
+      mode: off
+    title:
+      mode: off
+    description:
+      mode: off
+
+  tools:
+    biome:
+      enabled: false
+    languagetool:
+      enabled: false
+    markdownlint:
+      enabled: false
+    eslint:
+      enabled: false
+    reactDoctor:
+      enabled: false
+    ruff:
+      enabled: false
+    golangci-lint:
+      enabled: false
+    phpstan:
+      enabled: true
+    phpmd:
+      enabled: true
+    phpcs:
+      enabled: true
+
+chat:
+  art: false
+  auto_reply: true
+  integrations:
+    jira:
+      usage: auto
+
+knowledge_base:
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+  learnings:
+    scope: local
+  jira:
+    usage: enabled
+    project_keys:
+      - UN
+  pull_requests:
+    scope: local
