@@ -2,8 +2,8 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 
-use PennyBlack\Exception\PennyBlackException;
-use PennyBlack\Api;
+use StordUnbox\Exception\UnboxException;
+use StordUnbox\Api;
 use GuzzleHttp\Psr7\HttpFactory;
 use GuzzleHttp\Client;
 
@@ -27,6 +27,6 @@ $merchantId = 'YOUR-MERCHANT-ID';
 try {
     $response = $api->getOrderPrintStatus($merchantId, $orderId);
     print_r($response);
-} catch (PennyBlackException $e) {
+} catch (UnboxException $e) {
     print 'OOPS! Something went wrong: ' . $e->getMessage();
 }

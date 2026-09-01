@@ -1,11 +1,11 @@
 <?php
 
-namespace PennyBlack\Exception;
+namespace StordUnbox\Exception;
 
-class ApiException extends PennyBlackException
+class ApiException extends UnboxException
 {
     public function __construct(string $message, int $code = 0)
     {
-        parent::__construct(sprintf($code . ': Penny Black API service error: %s', $message), $code);
+        parent::__construct(sprintf($code . ': Stord Unbox API service error: %s', $message), $code);
     }
 }

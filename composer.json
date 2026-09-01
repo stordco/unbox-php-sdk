@@ -1,15 +1,15 @@
 {
-  "name": "pennyblack/php-sdk",
-  "description": "Penny Black PHP SDK",
+  "name": "stordco/unbox-php-sdk",
+  "description": "Stord Unbox PHP SDK",
   "license": "MIT",
   "authors": [
     {
-      "name": "Penny Black",
-      "email": "engineers@pennyblack.io"
+      "name": "Stord",
+      "email": "engineering@stord.com"
     }
   ],
   "require": {
-    "php": ">=7.4.0" ,
+    "php": ">=7.4.0",
     "ext-curl": "*",
     "ext-json": "*",
     "psr/http-client": "^1.0",
@@ -26,7 +26,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PennyBlack\\": "src/"
+      "StordUnbox\\": "src/"
     }
   },
   "config": {

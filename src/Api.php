@@ -1,14 +1,14 @@
 <?php
 
-namespace PennyBlack;
+namespace StordUnbox;
 
-use PennyBlack\Exception\ApiException;
-use PennyBlack\Exception\AuthenticationException;
-use PennyBlack\Exception\PennyBlackException;
-use PennyBlack\Exception\ServerErrorException;
-use PennyBlack\Exception\ServiceUnavailableException;
-use PennyBlack\Model\Customer;
-use PennyBlack\Model\Order;
+use StordUnbox\Exception\ApiException;
+use StordUnbox\Exception\AuthenticationException;
+use StordUnbox\Exception\UnboxException;
+use StordUnbox\Exception\ServerErrorException;
+use StordUnbox\Exception\ServiceUnavailableException;
+use StordUnbox\Model\Customer;
+use StordUnbox\Model\Order;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -66,7 +66,7 @@ class Api
     /**
      * @see https://pennyblack.stoplight.io/docs/pennyblack/ingest/operations/create-a-install
      *
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function installStore(string $shopUrl, string $originAppVersion = ''): void
     {
@@ -85,7 +85,7 @@ class Api
      *
      * @see https://pennyblack.stoplight.io/docs/pennyblack/ingest/operations/create-a-order
      *
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function sendOrder(Order $order, Customer $customer, string $origin, string $originAppVersion = ''): void
     {
@@ -108,7 +108,7 @@ class Api
      *
      * @return string The message to indicate the action taken
      *
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function requestPrint(
         string $orderId,
@@ -136,7 +136,7 @@ class Api
      *
      * @return array "batchId" and "message" keys
      *
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function requestBatchPrint(
         array $orderIds,
@@ -157,7 +157,7 @@ class Api
     /**
      * @see https://pennyblack.stoplight.io/docs/pennyblack/fulfilment/operations/get-a-fulfilment-order
      *
-     * @throws PennyBlackException
+     * @throws UnboxException
      */
     public function getOrderPrintStatus(string $merchantId, string $orderId): array
     {

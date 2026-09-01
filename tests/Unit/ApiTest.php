@@ -2,13 +2,13 @@
 
 namespace Unit;
 
-use PennyBlack\Api;
-use PennyBlack\Exception\ApiException;
-use PennyBlack\Exception\AuthenticationException;
-use PennyBlack\Exception\ServerErrorException;
-use PennyBlack\Exception\ServiceUnavailableException;
-use PennyBlack\Model\Customer;
-use PennyBlack\Model\Order;
+use StordUnbox\Api;
+use StordUnbox\Exception\ApiException;
+use StordUnbox\Exception\AuthenticationException;
+use StordUnbox\Exception\ServerErrorException;
+use StordUnbox\Exception\ServiceUnavailableException;
+use StordUnbox\Model\Customer;
+use StordUnbox\Model\Order;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
