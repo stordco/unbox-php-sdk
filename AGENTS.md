@@ -47,3 +47,9 @@ CI on PRs to `main` runs that pair on PHP 7.4, 8.2, and 8.3 with `composer updat
 - `composer.lock` is gitignored. CI resolves with `--prefer-lowest`; do not commit a lockfile.
 - Tests extend `PHPUnit\Framework\TestCase`. Method names use `testIt...`. Mock PSR HTTP types; do not hit the live API.
 - Keep the public surface small. New calls need a matching example under `example/` and unit tests.
+
+## Pull requests and releases
+
+- Merged PRs are squashed and the PR title becomes the commit message that release-please reads. Use a conventional commit title, for example `feat: add a method to the API client`. Types are `feat`, `fix`, `chore` and `docs`; `feat!` or `fix!` marks a breaking change; a scope is optional, as in `fix(api): ...`. `.github/workflows/pr.yaml` checks the title.
+- release-please opens and updates the release PR from merged commits. Merging it creates the tag and GitHub release. Packagist reads versions from git tags, so `composer.json` has no `version` field. Do not add one, and do not create tags or releases by hand.
+- Do not create a PR or push to a long-lived branch without an explicit request.
