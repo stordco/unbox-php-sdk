@@ -1,4 +1,4 @@
-# This file is synced with stordco/common-config-elixir. Any changes will be overwritten.
+# Uses the built-in token instead of the release app: this repository is public and the app secrets are not shared with it.
 
 name: Release
 
@@ -20,16 +20,11 @@ jobs:
 
     timeout-minutes: 15
 
-    steps:
-      - name: Generate Token
-        id: app-token
-        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
-        with:
-          app-id: ${{ secrets.RELEASE_APP_ID }}
-          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
-          permission-contents: write
-          permission-pull-requests: write
+    permissions:
+      contents: write
+      pull-requests: write
 
+    steps:
       - id: release
         name: Release
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
@@ -37,4 +32,4 @@ jobs:
           config-file: .github/release-please-config-stable.json
           manifest-file: .github/release-please-manifest.json
           target-branch: main
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
